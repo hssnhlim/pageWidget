@@ -40,6 +40,7 @@ class _PageWidgetState extends State<PageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple.shade400,
         title: const Text("Page Widget"),
       ),
       body: Column(
