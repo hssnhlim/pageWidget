@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'button_widget.dart';
@@ -73,6 +72,7 @@ class _PageWidgetState extends State<PageWidget> {
                   ),
                 ),
                 Expanded(
+                  flex: 3,
                   child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
