@@ -48,6 +48,7 @@ class _PageWidgetState extends State<PageWidget> {
             height: 20,
           ),
           Expanded(
+            flex: 5,
             child: ListView.builder(
               // Display only 1 item from the myList
               itemCount: 1,
@@ -72,16 +73,26 @@ class _PageWidgetState extends State<PageWidget> {
                   ),
                 ),
                 Expanded(
-                  flex: 3,
+                  flex: 5,
                   child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 40, horizontal: 10),
                     physics: const NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
                     itemCount: myList.length,
                     itemBuilder: (context, index) {
-                      return ButtonWidget(
-                        widget: Text(myList[index]['page'].toString()),
-                        func: () => goToPage(myList[index]['page']),
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        width: 35,
+                        decoration: BoxDecoration(
+                            color: _currentPage == index + 1
+                                ? Colors.deepPurple.shade300
+                                : null,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: ButtonWidget(
+                          widget: Text(myList[index]['page'].toString()),
+                          func: () => goToPage(myList[index]['page']),
+                        ),
                       );
                     },
                   ),
