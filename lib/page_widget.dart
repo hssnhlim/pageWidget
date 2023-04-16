@@ -13,24 +13,28 @@ class PageWidget extends StatefulWidget {
 
 class _PageWidgetState extends State<PageWidget> {
   // Set default index to 0
-  int selectedIndex = 0;
+  int _currentPage = 1;
 
-  void previousPage() {
+  void goToPage(int page) {
     setState(() {
-      selectedIndex = (selectedIndex - 1) % myList.length;
-      if (kDebugMode) {
-        print(selectedIndex);
-      }
+      _currentPage = page;
     });
   }
 
+  void previousPage() {
+    if (_currentPage > 1) {
+      setState(() {
+        _currentPage--;
+      });
+    }
+  }
+
   void nextPage() {
-    setState(() {
-      selectedIndex = (selectedIndex + 1) % myList.length;
-      if (kDebugMode) {
-        print(selectedIndex);
-      }
-    });
+    if (_currentPage < myList.length) {
+      setState(() {
+        _currentPage++;
+      });
+    }
   }
 
   @override
@@ -49,7 +53,9 @@ class _PageWidgetState extends State<PageWidget> {
               // Display only 1 item from the myList
               itemCount: 1,
               itemBuilder: (context, index) {
-                return Center(child: Text(myList[selectedIndex]['content']));
+                Map<String, dynamic> selectedItem = myList
+                    .firstWhere((element) => element['page'] == _currentPage);
+                return Center(child: Text(selectedItem['content']));
               },
             ),
           ),
@@ -75,7 +81,7 @@ class _PageWidgetState extends State<PageWidget> {
                     itemBuilder: (context, index) {
                       return ButtonWidget(
                         widget: Text(myList[index]['page'].toString()),
-                        func: () => nextPage(),
+                        func: () => goToPage(myList[index]['page']),
                       );
                     },
                   ),
