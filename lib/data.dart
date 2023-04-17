@@ -4,4 +4,5 @@ List<Map<String, dynamic>> myList = [
   {'id': 3, 'page': 3, 'content': 'This is the content of the third item'},
   {'id': 4, 'page': 4, 'content': 'This is the content of the fourth item'},
   {'id': 5, 'page': 5, 'content': 'This is the content of the fifth item'},
+  {'id': 6, 'page': 6, 'content': 'This is the content of the last item'},
 ];

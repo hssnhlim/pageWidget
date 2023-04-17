@@ -82,19 +82,65 @@ class _PageWidgetState extends State<PageWidget> {
                     scrollDirection: Axis.horizontal,
                     itemCount: myList.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        width: 35,
-                        decoration: BoxDecoration(
-                            color: _currentPage == index + 1
-                                ? Colors.deepPurple.shade300
-                                : null,
-                            borderRadius: BorderRadius.circular(5)),
-                        child: ButtonWidget(
-                          widget: Text(myList[index]['page'].toString()),
-                          func: () => goToPage(myList[index]['page']),
-                        ),
-                      );
+                      return index < 3
+                          ? Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              width: 35,
+                              decoration: BoxDecoration(
+                                  color: _currentPage == index + 1
+                                      ? Colors.deepPurple.shade300
+                                      : null,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: ButtonWidget(
+                                widget: Text(myList[index]['page'].toString()),
+                                func: () => goToPage(myList[index]['page']),
+                              ),
+                            )
+                          : index == 3
+                              ? Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                      color: _currentPage == index + 1
+                                          ? Colors.deepPurple.shade300
+                                          : null,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: ButtonWidget(
+                                    widget: const Text('...'),
+                                    func: () async {
+                                      setState(() {
+                                        _currentPage = 4;
+                                      });
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) => const AlertDialog(
+                                          title: Text('Go to'),
+                                          content:
+                                              Text('Dropdown select page here'),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                              : Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                      color: _currentPage == myList.last['page']
+                                          ? Colors.deepPurple.shade300
+                                          : null,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: ButtonWidget(
+                                    widget:
+                                        Text(myList.last['page'].toString()),
+                                    func: () {
+                                      goToPage(myList.last['page']);
+                                    },
+                                  ),
+                                );
                     },
                   ),
                 ),
