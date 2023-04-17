@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:page_widget/page_widget.dart';
+
+import 'bottom_page_navigator/page_widget.dart';
 
 void main() {
   runApp(const MainApp());
